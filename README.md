@@ -13,12 +13,19 @@
   <img src="https://img.shields.io/badge/display-SSD1306%20128×64-blue?style=flat-square" alt="Display">
   <img src="https://img.shields.io/badge/language-Python%203-yellow?style=flat-square&logo=python" alt="Language">
   <img src="https://img.shields.io/badge/apps-57+-green?style=flat-square" alt="Apps">
+  <img src="https://img.shields.io/badge/simulator-Live%20Demo-ff6600?style=flat-square&logo=googlechrome" alt="Live Demo">
   <img src="https://img.shields.io/badge/license-All%20Rights%20Reserved-red?style=flat-square" alt="License">
 </p>
 
 <p align="center">
   <em>128×64 piksel monokrom ekran üzerinde çalışan, 3 fiziksel düğme ile kontrol edilen,<br>
   57 uygulamalı tam bir masaüstü deneyimi.</em>
+</p>
+
+<p align="center">
+  <a href="https://seydivakkas.github.io/TinyOLED-Desktop/">
+    <img src="https://img.shields.io/badge/🖥️_Canlı_Demo_—_Tarayıcıda_Dene!-00e5ff?style=for-the-badge&logoColor=white" alt="Live Demo">
+  </a>
 </p>
 
 ---
@@ -49,6 +56,56 @@ Tüm sistem sıfırdan, herhangi bir GUI framework'ü kullanmadan yazılmıştı
 - ⚡ **Hafif:** Toplam bellek ayak izi ~2KB (128×64÷8 = 1024 byte framebuffer). GUI framework gerektirmez
 - 🔌 **Genişletilebilir:** Her yeni uygulama tek bir Python dosyasıdır. Standardize edilmiş arayüz sözleşmesiyle dakikalar içinde yeni uygulama yazılabilir
 - 🎮 **Eğlenceli:** Yılan oyunundan kripto takipçisine, TOTP authenticator'dan nefes egzersizine kadar 57 farklı uygulama
+- 🌐 **Web Simülatör:** Raspberry Pi olmadan tarayıcıda hemen deneyin! Tüm sistemi piksel-mükemmel olarak simüle eder
+
+---
+
+## 🌐 Web Simülatör — Tarayıcıda Canlı Demo
+
+> **Raspberry Pi'niz yok mu? Sorun değil!** Tüm TinyOLED Desktop deneyimini tarayıcınızda yaşayın.
+
+<p align="center">
+  <a href="https://seydivakkas.github.io/TinyOLED-Desktop/">
+    <strong>👉 seydivakkas.github.io/TinyOLED-Desktop 👈</strong>
+  </a>
+</p>
+
+Web simülatör, gerçek donanımı olmadan TinyOLED Desktop'ı tam olarak deneyimlemenizi sağlar. Python kaynak kodu satır satır JavaScript'e port edilmiştir — aynı framebuffer motoru, aynı font verisi, aynı çizim primitifleri.
+
+### ✨ Simülatör Özellikleri
+
+| Özellik | Detay |
+|---------|-------|
+| 🎨 **Piksel-Mükemmel Render** | 128×64 piksel, gerçek SSD1306 page formatı, OLED glow efekti |
+| ⌨️ **Klavye Kontrolleri** | `W`/`↑` Yukarı, `S`/`↓` Aşağı, `Enter`/`Space` Seç, `Esc` Geri |
+| 📱 **Dokunmatik Düğmeler** | Mobil uyumlu ekran üstü ▲ ▼ ● düğmeleri |
+| 🖥️ **PCB Kartı Tasarımı** | Gerçekçi baskılı devre görünümü, lehim delikleri, bakır yollar |
+| 🎮 **15 Çalışan Uygulama** | Saat, Yılan, Flappy Bird, 3D Küp, Fraktal, Matrix Rain ve daha fazlası |
+| 🔄 **20 FPS Animasyon** | requestAnimationFrame tabanlı akıcı render döngüsü |
+
+### 🎮 Simülatördeki Uygulamalar
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  🕐 Saat (Analog+Dijital)  │  💻 Sistem Bilgisi (4 sayfa)  │
+│  🐍 Yılan Oyunu            │  🐦 Flappy Bird               │
+│  🎲 Zar Simülatörü (D4-D20)│  🧊 3D Tel Kafes Küp          │
+│  🌀 Mandelbrot Fraktal     │  🧘 Nefes Egzersizi (4-7-8)   │
+│  🌙 Ay Evresi (gerçek)     │  🍅 Pomodoro Zamanlayıcı      │
+│  ⭐ Starfield 3D           │  💚 Matrix Digital Rain        │
+│  🧬 Conway's Game of Life  │  📀 DVD Bouncing Logo          │
+│  ⚙️ Ayarlar                │                                │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 🚀 Lokalde Çalıştırma
+
+```bash
+# Web simülatörü lokalde başlat
+cd web-simulator
+px serve
+# → http://localhost:3000 adresinde açılır
+```
 
 ---
 
@@ -510,6 +567,28 @@ TinyOLED-Desktop/
 │   ├── sd_health.py         # 💾 SD Kart Sağlığı
 │   ├── apt_update.py        # 📦 APT Güncelleme
 │   └── todo.py              # ☑️ Görev Listesi
+│
+├── web-simulator/           # 🌐 Tarayıcı tabanlı OLED simülatörü
+│   ├── index.html           # Ana sayfa (PCB board + OLED canvas)
+│   ├── index.css            # Premium koyu tema stiller
+│   ├── main.js              # Giriş noktası
+│   └── js/                  # JavaScript motor portları
+│       ├── framebuffer.js   # 128×64 software framebuffer
+│       ├── font.js          # 5×7 font + 55 ikon (Python portu)
+│       ├── display.js       # Canvas OLED renderer (glow efekti)
+│       ├── input.js         # Klavye + dokunmatik düğmeler
+│       ├── scheduler.js     # Kooperatif zamanlayıcı
+│       ├── shell.js         # SPLASH → HOME → APP durum makinesi
+│       ├── statusbar.js     # Üst durum çubuğu
+│       ├── launcher.js      # 3×2 ikon ızgarası launcher
+│       ├── notification.js  # Bildirim sistemi
+│       └── apps/            # 15 port edilmiş uygulama
+│           ├── clock.js     # 🕐 Saat (analog+dijital)
+│           ├── snake.js     # 🐍 Yılan Oyunu
+│           ├── flappy.js    # 🐦 Flappy Bird
+│           ├── cube3d.js    # 🧊 3D Küp
+│           ├── fractal.js   # 🌀 Mandelbrot Fraktal
+│           └── ...          # +10 uygulama daha
 │
 ├── config/
 │   ├── config.json          # Ana yapılandırma dosyası
