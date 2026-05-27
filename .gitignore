@@ -1,0 +1,13 @@
+# Python önbellek
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Log dosyaları
+*.log
+/tmp/
+
+# Editor dosyaları
+.vscode/
+*.swp
+*~

@@ -1,0 +1,12 @@
+[
+  {"name": "Uptime", "cmd": "uptime"},
+  {"name": "Disk Kullanimi", "cmd": "df -h /"},
+  {"name": "Bellek Durumu", "cmd": "free -m"},
+  {"name": "IP Adresi", "cmd": "hostname -I"},
+  {"name": "CPU Sicakligi", "cmd": "vcgencmd measure_temp"},
+  {"name": "Acik Portlar", "cmd": "ss -tulnp"},
+  {"name": "USB Cihazlar", "cmd": "lsusb"},
+  {"name": "WiFi Durumu", "cmd": "iwconfig wlan0"},
+  {"name": "Sistem Guncelle", "cmd": "sudo apt update"},
+  {"name": "Yeniden Baslat", "cmd": "sudo reboot"}
+]

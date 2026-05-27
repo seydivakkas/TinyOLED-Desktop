@@ -1,0 +1,21 @@
+{
+  "brightness": 200,
+  "timeout_s": 60,
+  "contrast": 2,
+  "fps": 20,
+  "i2c_bus": 1,
+  "i2c_address": "0x3C",
+  "pin_up": 17,
+  "pin_down": 27,
+  "pin_sel": 22,
+  "start_dir": "/home/pi",
+  "display_width": 128,
+  "display_height": 64,
+  "music_dir": "/home/pi/Music",
+  "screensaver": "starfield",
+  "screensaver_timeout_s": 120,
+  "github_user": "",
+  "telegram_token": "",
+  "pihole_url": "http://localhost/admin/api.php",
+  "ipcam_url": "http://192.168.1.100/capture"
+}

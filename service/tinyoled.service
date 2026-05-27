@@ -1,0 +1,17 @@
+[Unit]
+Description=TinyOLED Desktop (0.96" OLED Masaüstü)
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/pi/tiny-oled-desktop
+ExecStart=/usr/bin/python3 /home/pi/tiny-oled-desktop/main.py
+Restart=on-failure
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
