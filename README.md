@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/display-SSD1306%20128×64-blue?style=flat-square" alt="Display">
   <img src="https://img.shields.io/badge/language-Python%203-yellow?style=flat-square&logo=python" alt="Language">
   <img src="https://img.shields.io/badge/apps-57+-green?style=flat-square" alt="Apps">
-  <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/license-All%20Rights%20Reserved-red?style=flat-square" alt="License">
 </p>
 
 <p align="center">
@@ -639,7 +639,7 @@ self._launcher.register("myapp", "App", "heart", lambda: self._open(MyApp(ex)))
 
 ## 📄 Lisans
 
-Bu proje **MIT Lisansı** altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+**Tüm Hakları Saklıdır.** Bu proje özel bir lisans altında yayınlanmıştır. Kaynak kodu yalnızca görüntüleme ve eğitim amaçlı paylaşılmaktadır. Kopyalama, dağıtma, değiştirme veya ticari kullanım **yasaktır**. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
 
 ---
 
