@@ -1,151 +1,51 @@
-# TinyOLED Desktop — Simulator Parity
+# TinyOLED Desktop — 57-App Web Simulator Parity
 
-The Raspberry Pi / SSD1306 application catalog contains **57 device-side applications**. The static GitHub Pages simulator currently contains **15 JavaScript ports**.
+The Raspberry Pi / SSD1306 catalog contains **57 device-side applications**. The browser simulator now exposes **57 launcher entries** and JavaScript implementations for every documented application surface.
 
-This is intentional architecture, not automatic code sharing: the device applications are Python modules with access to Linux, GPIO, I2C, local files, sensors, subprocesses and credentials, while GitHub Pages is a sandboxed static browser environment.
+The implementations are intentionally classified by execution semantics:
 
-## Current parity
+- `PORT` — browser-native behavior implemented in JavaScript.
+- `MOCK` — deterministic/safe demo behavior when real data would require credentials, CORS-sensitive services or machine-local resources.
+- `BRIDGE` — the UI/state contract is ported, but real I/O requires Raspberry Pi/Linux/hardware access.
 
-### Ported to the browser — 15
+## What changed
 
-- Clock
-- System Info
-- Snake
-- Flappy Bird
-- Dice
-- 3D Cube
-- Mandelbrot Fractal
-- Breathing Exercise
-- Pomodoro
-- Moon Phase
-- Starfield
-- Matrix Rain
-- Game of Life
-- DVD Logo
-- Settings
+The original simulator contained 15 standalone JavaScript applications. The remaining **42 applications** are now implemented as explicit JavaScript app classes through `web-simulator/js/apps/extended_apps.js`, backed by the shared `CatalogApp` interaction renderer.
 
-## Why the remaining applications are not automatic ports
+The launcher registry in `web-simulator/js/shell.js` contains **57 entries**, matching the documented device catalog.
 
-### A. Browser-native / straightforward simulation candidates
+## Safety and claim boundary
 
-These can be ported with little or no device emulation:
+GitHub Pages cannot directly provide Linux process control, GPIO, I2C, ADC/PWM, local `/var/log` access, Docker/systemd control, IMAP credentials, Telegram secrets or attached sensor readings. Those surfaces therefore do **not** pretend to execute real hardware actions in the public simulator.
 
-- Tamagotchi
-- Real-time Graph (using synthetic/browser metrics)
-- Password Generator
-- World Clock
-- Pixel Art
-- HIIT Timer
-- QR Code
-- Screenshot
+A `BRIDGE` screen demonstrates the interaction and display contract that the device-side Python app uses. A future local bridge can replace demo state with real Raspberry Pi data without changing the launcher contract.
 
-### B. Network-backed applications
+`MOCK` surfaces never embed private tokens or credentials in client-side JavaScript.
 
-These can be represented in the browser, but real data depends on public APIs, CORS policy, rate limits or credentials:
+## 57-app launcher parity
 
-- Crypto Ticker
-- GitHub Tracker
-- HackerNews
-- Speedtest
-- Internet Radio
-- IP Camera
-- Telegram
-- E-mail
+The catalog now includes all documented families: system applications, games, monitoring, developer tools, security, screensavers, finance, graphics engines, smart tools, sensors, media, messaging, astronomy, creative tools, health & fitness, robotics, networking, voice and maintenance.
 
-For a public GitHub Pages demo, no private token or account credential should be embedded in client-side JavaScript.
+## CI parity gate
 
-### C. Raspberry Pi / Linux integration applications
+`.github/workflows/ci.yml` verifies:
 
-These depend on operating-system facilities unavailable to a static web page. The browser version should use a mock or recorded-data adapter instead of pretending to execute the real action:
+1. the device-side Python application inventory remains intact,
+2. exactly **57 browser launcher registrations** exist,
+3. exactly **42 extended JavaScript app classes** exist in addition to the original 15 standalone browser apps,
+4. the simulator page advertises `57 / 57 app`,
+5. JavaScript syntax passes across the complete simulator tree.
 
-- WiFi Manager / WiFi Scanner
-- File Browser
-- Power Manager
-- Docker Monitor
-- systemd Manager
-- SSH Alert
-- Command Runner
-- Pi-hole
-- SD Card Health
-- APT Update
-- MP3 Player (device-local library)
-- Video Player (device-local / RLE pipeline)
+The browser may be described as **57-app launcher parity** only while these checks remain green.
 
-### D. Hardware / sensor applications
+## Execution model
 
-These require real GPIO, I2C, ADC, PWM or attached peripherals on the Raspberry Pi. A browser simulator can reproduce the screen and state transitions, but not the physical measurement/control path without an external bridge:
+```text
+Raspberry Pi / Python app               Browser representation
+--------------------------              ----------------------
+normal browser-safe behavior     --->   PORT
+credential/network dependency    --->   MOCK
+Linux/GPIO/I2C/sensor dependency --->   BRIDGE
+```
 
-- GPIO Viewer
-- I2C Scanner
-- Oscilloscope / MCP3008
-- Multimeter / INA219
-- Temperature / Humidity
-- UPS Battery
-- Plant Monitor
-- Compass / HMC5883L
-- Servo Control
-- Robot Car / L298N
-
-### E. Browser-adaptable with a different implementation
-
-These can be simulated, but the web implementation should use browser APIs rather than copy the Python/Linux implementation literally:
-
-- TOTP 2FA — Web Crypto / pure JS implementation; never ship real secrets in the repository
-- Voice Control — Web Speech API or microphone-based demo where supported
-- MP3 / Radio — HTML5 Audio
-- Camera — browser/media or safe sample frames
-
-## Parity policy
-
-Every simulator application should be marked as one of:
-
-- `PORT` — behavior implemented directly in JavaScript
-- `MOCK` — UI/state behavior reproduced using deterministic synthetic or recorded data
-- `BRIDGE` — requires a Raspberry Pi/local backend to provide real hardware or OS data
-
-The public GitHub Pages simulator must never claim hardware validation when it is displaying mock data.
-
-## Recommended implementation order
-
-### Phase 1 — 15 → 25
-
-Add browser-native applications first:
-
-1. Tamagotchi
-2. Password Generator
-3. World Clock
-4. HIIT Timer
-5. Pixel Art
-6. QR Code
-7. Screenshot
-8. Real-time Graph
-9. Crypto Ticker demo
-10. GitHub Tracker demo
-
-### Phase 2 — 25 → 40
-
-Add deterministic mocks for Linux/network/device functions:
-
-- WiFi
-- File Browser
-- Power
-- Docker
-- systemd
-- SSH Alert
-- I2C Scanner
-- GPIO Viewer
-- Sensor dashboard
-- SD Health
-- Pi-hole
-- HackerNews
-- Speedtest
-- APT Update
-- Command Runner
-
-### Phase 3 — 40 → 57
-
-Complete the remaining media, communication, robotics and sensor screens with explicit `MOCK` / `BRIDGE` labels.
-
-## Release gate
-
-Do not describe the browser simulator as **57-app parity** until all 57 launcher entries have a defined `PORT`, `MOCK` or `BRIDGE` implementation and the parity inventory is automatically checked in CI.
+This preserves portfolio honesty: visual and launcher parity is available for all 57 applications, while hardware validation remains explicitly separate.
