@@ -12,7 +12,7 @@
 ![SSD1306](https://img.shields.io/badge/OLED-128%C3%9764-0A66C2?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Device Apps](https://img.shields.io/badge/device%20apps-57-2EA44F?style=flat-square)
-![Web Simulator](https://img.shields.io/badge/web%20ports-15-F59E0B?style=flat-square)
+![Web Launcher](https://img.shields.io/badge/web%20launcher-57%2F57-2EA44F?style=flat-square)
 [![Pages](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml)
 
 **A tiny desktop environment built without a GUI framework: custom framebuffer rendering, bitmap fonts, monochrome icons, cooperative scheduling and a browser-based OLED simulator.**
@@ -35,13 +35,19 @@ Instead of relying on a desktop GUI toolkit, the project implements the renderin
 
 ## Application scope
 
-The Raspberry Pi / SSD1306 project contains a **57-application device catalog**. The public GitHub Pages simulator is a separate JavaScript port and currently implements **15 interactive applications**.
+The Raspberry Pi / SSD1306 project contains a **57-application device catalog**. The browser simulator now exposes **57 / 57 launcher entries** and a JavaScript representation for every documented application surface.
 
-This distinction matters because the browser cannot directly execute Raspberry Pi / Linux facilities such as GPIO, I²C, `systemd`, Docker, `/var/log`, local shell commands, attached sensors or private account credentials. Those applications require either a browser-native port, a deterministic mock, or a Raspberry Pi/local bridge.
+The browser implementations are deliberately classified:
 
-**Current parity:** `15 web ports / 57 device applications`
+- **`PORT`** — browser-native JavaScript behavior.
+- **`MOCK`** — deterministic/safe demo behavior when real data would require credentials or machine-local resources.
+- **`BRIDGE`** — the UI/state contract is available in the browser, while real GPIO, I²C, Linux, sensor or service I/O still requires the Raspberry Pi/local environment.
 
-See the implementation roadmap and classification policy in **[Simulator Parity](docs/SIMULATOR_PARITY.md)**.
+This distinction prevents simulated data from being presented as hardware validation.
+
+**Current parity:** `57 / 57 browser launcher entries · 15 original standalone ports + 42 extended JS app classes`
+
+See **[Simulator Parity](docs/SIMULATOR_PARITY.md)** for the execution model and claim boundary.
 
 ---
 
@@ -49,7 +55,7 @@ See the implementation roadmap and classification policy in **[Simulator Parity]
 
 ### Browser path — no hardware required
 
-Open the **[live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)** to inspect the currently ported framebuffer/UI behavior directly.
+Open the **[live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)** and navigate the 57-app launcher with the on-screen buttons or keyboard.
 
 ### Raspberry Pi path
 
@@ -91,7 +97,7 @@ Physical Buttons / Browser Input
        SSD1306 128×64
 ```
 
-The interaction model is mirrored in the browser simulator, but device-specific integrations are not claimed as browser-native behavior unless a port/mock/bridge exists.
+The same interaction contract is mirrored in the browser. Device-specific integrations remain explicitly separated through `PORT`, `MOCK` and `BRIDGE` semantics.
 
 ---
 
@@ -108,21 +114,8 @@ The interaction model is mirrored in the browser simulator, but device-specific 
 | Hardware | Raspberry Pi + SSD1306 over I²C |
 | Simulation | Browser implementation of the OLED desktop behavior |
 | Device application set | **57 applications** across utilities, visualization, games, sensors and system tools |
-| Current web parity | **15 JavaScript ports** |
-
----
-
-## What it demonstrates
-
-TinyOLED Desktop is intentionally different from the AI-heavy projects in this portfolio. It demonstrates lower-level engineering breadth:
-
-- framebuffer graphics,
-- constrained UI design,
-- embedded state machines,
-- physical input handling,
-- cooperative scheduling,
-- hardware / software boundaries,
-- and cross-platform simulation of an embedded interface.
+| Browser launcher parity | **57 / 57 entries** |
+| Web implementation structure | **15 standalone apps + 42 extended JavaScript classes** |
 
 ---
 
@@ -135,22 +128,25 @@ Clock · system information · Wi-Fi tools · settings · file utilities · time
 Graphs · matrix effects · starfield · fractal / geometry demos
 
 **Games & interaction**  
-Snake · Flappy-style game · dice · virtual pet and other compact applications
+Snake · Flappy-style game · dice · Tamagotchi · timers and interaction tools
 
 **Hardware & sensors**  
 GPIO · I²C · ADC · power monitoring · environmental sensors · robotics
+
+**Network / services / media**  
+Docker · systemd · Pi-hole · HackerNews · crypto · radio · messaging · camera surfaces
 
 ---
 
 ## Browser simulator
 
-The browser simulator reproduces the OLED interaction model using a canvas-based renderer. It currently exposes the **15 applications already ported to JavaScript**, not the full 57-device catalog.
+The GitHub Pages simulator now includes the complete **57-entry application launcher**. Hardware- or Linux-dependent applications do not fake real measurements or side effects: their browser surfaces are explicitly marked `BRG`, while credential/network-sensitive demonstrations use `MOCK` where appropriate.
 
-The remaining applications are tracked as `PORT`, `MOCK` or `BRIDGE` targets so the public demo never pretends that browser-generated data is real hardware evidence.
+The parity contract is enforced in CI so a future change cannot silently reduce the launcher back below 57 entries.
 
 ### **[Open the live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)**
 
-### **[Simulator parity roadmap →](docs/SIMULATOR_PARITY.md)**
+### **[Simulator parity contract →](docs/SIMULATOR_PARITY.md)**
 
 ---
 
@@ -167,6 +163,7 @@ The remaining applications are tracked as `PORT`, `MOCK` or `BRIDGE` targets so 
 3. **Keep interaction deterministic with explicit state machines**
 4. **Separate application logic from the display backend**
 5. **Do not present simulated data as hardware validation**
+6. **Enforce device/browser catalog parity in CI**
 
 ---
 
@@ -182,7 +179,7 @@ It contains the full 57-application catalog, hardware setup, architecture detail
 
 <div align="center">
 
-**128×64 pixels. Three buttons. A complete micro-desktop experiment.**
+**128×64 pixels. Three buttons. 57 application surfaces.**
 
 [Live Simulator](https://seydivakkas.github.io/TinyOLED-Desktop/) · [Simulator Parity](docs/SIMULATOR_PARITY.md) · [Full Documentation](docs/README_FULL.md)
 
