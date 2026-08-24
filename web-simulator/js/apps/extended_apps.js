@@ -1,0 +1,211 @@
+import { CatalogApp } from '../catalog_app.js';
+
+export class WiFiApp extends CatalogApp {
+  static NAME = 'wifi'; static LABEL = 'WiFi'; static ICON = 'radar';
+  constructor(onExit) { super(onExit, { title: 'WiFi', mode: 'BRIDGE', rows: [['Aglar','6 bulundu'],['Secili','TinyOLED-Lab'],['Sinyal','-48 dBm'],['Durum','bagli']], action: 'SEL: baglan/kes' }); }
+}
+
+export class FileBrowserApp extends CatalogApp {
+  static NAME = 'file'; static LABEL = 'Dosya'; static ICON = 'script';
+  constructor(onExit) { super(onExit, { title: 'Dosya', mode: 'BRIDGE', rows: [['Konum','/home/pi'],['Oge','Documents'],['Tur','klasor'],['Boyut','--']], action: 'SEL: ac/gir' }); }
+}
+
+export class PowerApp extends CatalogApp {
+  static NAME = 'power'; static LABEL = 'Guc'; static ICON = 'service';
+  constructor(onExit) { super(onExit, { title: 'Guc', mode: 'BRIDGE', rows: [['Eylem','Uyku'],['Uptime','2d 04h'],['CPU','42 C'],['Onay','bekliyor']], action: 'SEL: uygula' }); }
+}
+
+export class TamagotchiApp extends CatalogApp {
+  static NAME = 'tamagotchi'; static LABEL = 'Pet'; static ICON = 'pet';
+  constructor(onExit) { super(onExit, { title: 'Pet', mode: 'PORT', rows: [['Aclik','72%'],['Mutlu','88%'],['Enerji','65%'],['Temiz','91%']], action: 'SEL: bakim' }); }
+}
+
+export class GraphApp extends CatalogApp {
+  static NAME = 'graph'; static LABEL = 'Grafik'; static ICON = 'graph';
+  constructor(onExit) { super(onExit, { title: 'Grafik', mode: 'MOCK', rows: [['Metrik','CPU'],['Anlik','43%'],['Ort','38%'],['Pencere','100 nokta']], action: 'SEL: metrik' }); }
+}
+
+export class DockerApp extends CatalogApp {
+  static NAME = 'docker'; static LABEL = 'Docker'; static ICON = 'docker';
+  constructor(onExit) { super(onExit, { title: 'Docker', mode: 'BRIDGE', rows: [['nginx','RUN'],['api','RUN'],['worker','STOP'],['Toplam','3']], action: 'SEL: toggle' }); }
+}
+
+export class SystemdApp extends CatalogApp {
+  static NAME = 'systemd'; static LABEL = 'Svc'; static ICON = 'service';
+  constructor(onExit) { super(onExit, { title: 'Svc', mode: 'BRIDGE', rows: [['ssh','active'],['nginx','active'],['docker','active'],['cron','active']], action: 'SEL: restart' }); }
+}
+
+export class GPIOViewerApp extends CatalogApp {
+  static NAME = 'gpio'; static LABEL = 'GPIO'; static ICON = 'pin';
+  constructor(onExit) { super(onExit, { title: 'GPIO', mode: 'BRIDGE', rows: [['GPIO17','HIGH'],['GPIO18','PWM'],['GPIO22','LOW'],['GPIO27','LOW']], action: 'SEL: toggle' }); }
+}
+
+export class I2CScannerApp extends CatalogApp {
+  static NAME = 'i2c'; static LABEL = 'I2C'; static ICON = 'i2c';
+  constructor(onExit) { super(onExit, { title: 'I2C', mode: 'BRIDGE', rows: [['Bus','1'],['0x3C','SSD1306'],['0x40','INA219'],['0x68','RTC']], action: 'SEL: tara' }); }
+}
+
+export class CommandRunnerApp extends CatalogApp {
+  static NAME = 'script'; static LABEL = 'Komut'; static ICON = 'script';
+  constructor(onExit) { super(onExit, { title: 'Komut', mode: 'BRIDGE', rows: [['Komut','uptime'],['Durum','hazir'],['Cikis','--'],['Yetki','local']], action: 'SEL: calistir' }); }
+}
+
+export class OscilloscopeApp extends CatalogApp {
+  static NAME = 'scope'; static LABEL = 'Scope'; static ICON = 'scope';
+  constructor(onExit) { super(onExit, { title: 'Scope', mode: 'MOCK', rows: [['Kaynak','MCP3008'],['Freq','50 Hz'],['Vpp','3.1 V'],['Mod','demo sin']], action: 'SEL: kaynak' }); }
+}
+
+export class MultimeterApp extends CatalogApp {
+  static NAME = 'meter'; static LABEL = 'Metre'; static ICON = 'volt';
+  constructor(onExit) { super(onExit, { title: 'Metre', mode: 'BRIDGE', rows: [['Volt','5.08 V'],['Akim','412 mA'],['Guc','2.09 W'],['Sensor','INA219']], action: 'SEL: yenile' }); }
+}
+
+export class SSHAlertApp extends CatalogApp {
+  static NAME = 'ssh'; static LABEL = 'SSH'; static ICON = 'shield';
+  constructor(onExit) { super(onExit, { title: 'SSH', mode: 'BRIDGE', rows: [['Son IP','192.0.2.42'],['Hata','3'],['Pencere','10 dk'],['Log','auth.log']], action: 'SEL: detay' }); }
+}
+
+export class TOTPApp extends CatalogApp {
+  static NAME = 'totp'; static LABEL = 'TOTP'; static ICON = 'key';
+  constructor(onExit) { super(onExit, { title: 'TOTP', mode: 'PORT', rows: [['Kod','482 193'],['Kalan','21 sn'],['Profil','DEMO'],['RFC','6238']], action: 'SEL: demo yenile' }); }
+}
+
+export class PasswordGeneratorApp extends CatalogApp {
+  static NAME = 'passgen'; static LABEL = 'Sifre'; static ICON = 'passkey';
+  constructor(onExit) { super(onExit, { title: 'Sifre', mode: 'PORT', rows: [['Uzunluk','16'],['Set','A-z0-9!'],['Sifre','K7!q2#Lm'],['Entropi','demo']], action: 'SEL: uret' }); }
+}
+
+export class WiFiScannerApp extends CatalogApp {
+  static NAME = 'wifiscan'; static LABEL = 'WiScan'; static ICON = 'radar';
+  constructor(onExit) { super(onExit, { title: 'WiScan', mode: 'BRIDGE', rows: [['TinyLab','-48 WPA2'],['Guest','-62 WPA2'],['IoT','-70 WPA3'],['Kanal','1/6/11']], action: 'SEL: tara' }); }
+}
+
+export class CryptoTickerApp extends CatalogApp {
+  static NAME = 'crypto'; static LABEL = 'Kripto'; static ICON = 'crypto';
+  constructor(onExit) { super(onExit, { title: 'Kripto', mode: 'MOCK', rows: [['BTC','$64.2k +1.8'],['ETH','$3.4k +0.9'],['SOL','$148 -0.4'],['Kaynak','demo']], action: 'SEL: yenile' }); }
+}
+
+export class QRCodeApp extends CatalogApp {
+  static NAME = 'qr'; static LABEL = 'QR'; static ICON = 'qr';
+  constructor(onExit) { super(onExit, { title: 'QR', mode: 'PORT', rows: [['Veri','192.168.1.42'],['Mod','IP URL'],['Boyut','21x21'],['Durum','hazir']], action: 'SEL: degistir' }); }
+}
+
+export class GitHubTrackerApp extends CatalogApp {
+  static NAME = 'github'; static LABEL = 'GitHub'; static ICON = 'github';
+  constructor(onExit) { super(onExit, { title: 'GitHub', mode: 'MOCK', rows: [['Commit','214'],['Streak','12 gun'],['Hafta','+18'],['Kaynak','demo']], action: 'SEL: yenile' }); }
+}
+
+export class SpeedtestApp extends CatalogApp {
+  static NAME = 'speed'; static LABEL = 'Speed'; static ICON = 'speed';
+  constructor(onExit) { super(onExit, { title: 'Speed', mode: 'MOCK', rows: [['Down','92 Mbps'],['Up','18 Mbps'],['Ping','24 ms'],['Mod','demo']], action: 'SEL: test' }); }
+}
+
+export class HackerNewsApp extends CatalogApp {
+  static NAME = 'news'; static LABEL = 'HNews'; static ICON = 'news';
+  constructor(onExit) { super(onExit, { title: 'HNews', mode: 'MOCK', rows: [['1','TinyML tools'],['2','Linux 6.x'],['3','WebGPU demo'],['Kaynak','demo']], action: 'SEL: sonraki' }); }
+}
+
+export class TemperatureHumidityApp extends CatalogApp {
+  static NAME = 'temp'; static LABEL = 'Temp'; static ICON = 'temp';
+  constructor(onExit) { super(onExit, { title: 'Temp', mode: 'BRIDGE', rows: [['Sicak','24.6 C'],['Nem','48%'],['Sensor','DHT22'],['Durum','normal']], action: 'SEL: yenile' }); }
+}
+
+export class UPSBatteryApp extends CatalogApp {
+  static NAME = 'ups'; static LABEL = 'UPS'; static ICON = 'ups';
+  constructor(onExit) { super(onExit, { title: 'UPS', mode: 'BRIDGE', rows: [['Pil','82%'],['Volt','4.08 V'],['Tahmin','3h 12m'],['Durum','sarj']], action: 'SEL: detay' }); }
+}
+
+export class PlantMonitorApp extends CatalogApp {
+  static NAME = 'plant'; static LABEL = 'Bitki'; static ICON = 'plant';
+  constructor(onExit) { super(onExit, { title: 'Bitki', mode: 'BRIDGE', rows: [['Nem','34%'],['Esik','30%'],['Pompa','OFF'],['Durum','iyi']], action: 'SEL: pompa' }); }
+}
+
+export class CompassApp extends CatalogApp {
+  static NAME = 'compass'; static LABEL = 'Pusula'; static ICON = 'compass';
+  constructor(onExit) { super(onExit, { title: 'Pusula', mode: 'BRIDGE', rows: [['Yon','Kuzey'],['Aci','004 deg'],['Sensor','HMC5883L'],['Kalib','OK']], action: 'SEL: kalibre' }); }
+}
+
+export class MP3PlayerApp extends CatalogApp {
+  static NAME = 'mp3'; static LABEL = 'MP3'; static ICON = 'music';
+  constructor(onExit) { super(onExit, { title: 'MP3', mode: 'BRIDGE', rows: [['Parca','demo.mp3'],['Sure','01:24/03:40'],['Durum','PLAY'],['Kaynak','/Music']], action: 'SEL: play/pause' }); }
+}
+
+export class RadioApp extends CatalogApp {
+  static NAME = 'radio'; static LABEL = 'Radyo'; static ICON = 'radio';
+  constructor(onExit) { super(onExit, { title: 'Radyo', mode: 'MOCK', rows: [['Kanal','LoFi'],['Codec','stream'],['Durum','PLAY'],['Ses','70%']], action: 'SEL: kanal' }); }
+}
+
+export class VideoPlayerApp extends CatalogApp {
+  static NAME = 'video'; static LABEL = 'Video'; static ICON = 'video';
+  constructor(onExit) { super(onExit, { title: 'Video', mode: 'MOCK', rows: [['Dosya','demo.rle'],['Kare','124/900'],['FPS','12'],['Mod','1-bit']], action: 'SEL: oynat' }); }
+}
+
+export class TelegramApp extends CatalogApp {
+  static NAME = 'telegram'; static LABEL = 'Tele'; static ICON = 'telegram';
+  constructor(onExit) { super(onExit, { title: 'Tele', mode: 'MOCK', rows: [['Mesaj','3 yeni'],['Kimden','DemoBot'],['Token','yok'],['Mod','offline']], action: 'SEL: sonraki' }); }
+}
+
+export class EmailApp extends CatalogApp {
+  static NAME = 'email'; static LABEL = 'Email'; static ICON = 'email';
+  constructor(onExit) { super(onExit, { title: 'Email', mode: 'MOCK', rows: [['Okunmamis','7'],['IMAP','offline'],['Hesap','demo'],['Gizlilik','safe']], action: 'SEL: yenile' }); }
+}
+
+export class WorldClockApp extends CatalogApp {
+  static NAME = 'world'; static LABEL = 'Dunya'; static ICON = 'world';
+  constructor(onExit) { super(onExit, { title: 'Dunya', mode: 'PORT', rows: [['IST','17:30'],['LON','15:30'],['NYC','10:30'],['TYO','23:30']], action: 'SEL: sehir' }); }
+}
+
+export class PixelArtApp extends CatalogApp {
+  static NAME = 'pixel'; static LABEL = 'Pixel'; static ICON = 'paint';
+  constructor(onExit) { super(onExit, { title: 'Pixel', mode: 'PORT', rows: [['X','64'],['Y','32'],['Kalem','ON'],['Kare','128x64']], action: 'SEL: ciz' }); }
+}
+
+export class ScreenshotApp extends CatalogApp {
+  static NAME = 'shot'; static LABEL = 'Shot'; static ICON = 'camera';
+  constructor(onExit) { super(onExit, { title: 'Shot', mode: 'PORT', rows: [['Format','PNG'],['Kaynak','canvas'],['Boyut','128x64'],['Durum','hazir']], action: 'SEL: kaydet' }); }
+}
+
+export class HIITTimerApp extends CatalogApp {
+  static NAME = 'hiit'; static LABEL = 'HIIT'; static ICON = 'workout';
+  constructor(onExit) { super(onExit, { title: 'HIIT', mode: 'PORT', rows: [['Program','Tabata'],['Calis','20 sn'],['Dinlen','10 sn'],['Tur','1/8']], action: 'SEL: baslat' }); }
+}
+
+export class ServoControlApp extends CatalogApp {
+  static NAME = 'servo'; static LABEL = 'Servo'; static ICON = 'servo';
+  constructor(onExit) { super(onExit, { title: 'Servo', mode: 'BRIDGE', rows: [['Aci','90 deg'],['GPIO','18 PWM'],['Pulse','1500 us'],['Durum','demo']], action: 'SEL: merkez' }); }
+}
+
+export class RobotCarApp extends CatalogApp {
+  static NAME = 'car'; static LABEL = 'Araba'; static ICON = 'car';
+  constructor(onExit) { super(onExit, { title: 'Araba', mode: 'BRIDGE', rows: [['Yon','STOP'],['Hiz','0%'],['Surucu','L298N'],['Durum','demo']], action: 'SEL: hareket' }); }
+}
+
+export class PiHoleApp extends CatalogApp {
+  static NAME = 'pihole'; static LABEL = 'PiHole'; static ICON = 'pihole';
+  constructor(onExit) { super(onExit, { title: 'PiHole', mode: 'BRIDGE', rows: [['Engel','12,430'],['DNS','84,210'],['Oran','14.8%'],['Durum','ACTIVE']], action: 'SEL: toggle' }); }
+}
+
+export class IPCameraApp extends CatalogApp {
+  static NAME = 'ipcam'; static LABEL = 'IPCam'; static ICON = 'camera';
+  constructor(onExit) { super(onExit, { title: 'IPCam', mode: 'MOCK', rows: [['Kaynak','sample'],['FPS','5'],['Dither','1-bit'],['Durum','offline']], action: 'SEL: frame' }); }
+}
+
+export class VoiceControlApp extends CatalogApp {
+  static NAME = 'voice'; static LABEL = 'Ses'; static ICON = 'mic';
+  constructor(onExit) { super(onExit, { title: 'Ses', mode: 'MOCK', rows: [['Motor','Vosk'],['Komut','bekliyor'],['Dil','tr-TR'],['Mod','demo']], action: 'SEL: dinle' }); }
+}
+
+export class SDHealthApp extends CatalogApp {
+  static NAME = 'sd'; static LABEL = 'SD'; static ICON = 'sd';
+  constructor(onExit) { super(onExit, { title: 'SD', mode: 'BRIDGE', rows: [['Toplam','64 GB'],['Kullan','21 GB'],['Bos','43 GB'],['Doluluk','33%']], action: 'SEL: yenile' }); }
+}
+
+export class APTUpdateApp extends CatalogApp {
+  static NAME = 'apt'; static LABEL = 'APT'; static ICON = 'apt';
+  constructor(onExit) { super(onExit, { title: 'APT', mode: 'BRIDGE', rows: [['Bekleyen','12'],['Guvenlik','3'],['Son','bugun'],['Yetki','sudo']], action: 'SEL: liste' }); }
+}
+
+export class TodoApp extends CatalogApp {
+  static NAME = 'todo'; static LABEL = 'Todo'; static ICON = 'todo';
+  constructor(onExit) { super(onExit, { title: 'Todo', mode: 'PORT', rows: [['1','[x] README'],['2','[ ] Test'],['3','[ ] Deploy'],['Tamam','1/3']], action: 'SEL: toggle' }); }
+}
