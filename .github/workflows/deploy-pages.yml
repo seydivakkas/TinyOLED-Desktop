@@ -2,9 +2,10 @@ name: Deploy Web Simulator to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master", "main"]
     paths:
       - "web-simulator/**"
+      - "index.html"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -15,7 +16,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -30,7 +31,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload simulator artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "web-simulator"
