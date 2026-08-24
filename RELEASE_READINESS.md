@@ -7,6 +7,9 @@ TinyOLED Desktop is a strong `v1.0.0` candidate because it has a clear product b
 - [x] Portfolio README is concise and reproducible.
 - [x] Live browser simulator is documented.
 - [x] GitHub Pages deployment workflow exists.
+- [x] GitHub Pages routing compatibility is fixed for both branch-source and Actions deployment modes.
+- [x] Root `index.html` routes `/TinyOLED-Desktop/` to the simulator when branch-source Pages is used.
+- [x] Pages workflow supports both `master` and `main` during the branch migration.
 - [x] `main` branch contains the current candidate content.
 - [x] Static release-readiness CI workflow exists and supports manual dispatch.
 - [x] Known limitations are documented.
