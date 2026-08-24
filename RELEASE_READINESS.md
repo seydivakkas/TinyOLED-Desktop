@@ -19,7 +19,7 @@ TinyOLED Desktop is a strong `v1.0.0` candidate because it has a clear product b
 - [x] Known limitations are documented.
 - [x] `v1.0.0` release notes draft exists.
 - [x] Static CI validated green against the current runtime/code tree via temporary PR CI run #28 (`32745087198`).
-- [ ] Pages workflow confirmed green from `main`.
+- [x] Pages workflow confirmed green from `main` for deployment marker commit `828dc0b75e044203ce4d0d95cad567cd4429edca`.
 - [ ] Raspberry Pi + SSD1306 install path smoke-tested on the final release commit.
 - [ ] Hardware-dependent BRG execution paths smoke-tested on the intended Raspberry Pi configuration.
 - [ ] Release commit SHA locked below.
@@ -38,11 +38,15 @@ Temporary validation PR #1 changed only `docs/CI_VALIDATION_MARKER.md`; runtime 
 
 The validation PR was closed without merging.
 
+## Pages evidence
+
+The GitHub Pages workflow **Deploy Web Simulator to GitHub Pages** completed successfully from `main` for commit `828dc0b75e044203ce4d0d95cad567cd4429edca` (`chore: trigger Pages deployment for browser runtime upgrade`). This validates the browser deployment path for the upgraded 57-app runtime.
+
 ## Current integration candidate
 
 `828dc0b75e044203ce4d0d95cad567cd4429edca`
 
-This commit contains the post-merge Pages deployment marker on top of the 42-app browser runtime upgrade. Subsequent commits only update release-readiness documentation. It is **not** the final release SHA until Pages and hardware gates pass.
+This commit contains the post-merge Pages deployment marker on top of the 42-app browser runtime upgrade. Subsequent commits only update release-readiness documentation. It is **not** the final release SHA until hardware gates pass.
 
 ## Release commit
 
