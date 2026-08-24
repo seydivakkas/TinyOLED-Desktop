@@ -25,7 +25,9 @@ jobs:
           python-version: "3.11"
 
       - name: Python syntax check
-        run: python -m compileall -q main.py core apps desktop config
+        run: |
+          python -m compileall -q main.py core apps desktop config
+          python -m py_compile web-bridge/server.py
 
       - name: Installer shell syntax
         run: bash -n install.sh
@@ -44,20 +46,38 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+
           shell = Path("web-simulator/js/shell.js").read_text(encoding="utf-8")
-          extended = Path("web-simulator/js/apps/extended_apps.js").read_text(encoding="utf-8")
-          legacy = [p for p in Path("web-simulator/js/apps").glob("*.js") if p.name != "extended_apps.js"]
+          app_dir = Path("web-simulator/js/apps")
+          barrel = (app_dir / "extended_apps.js").read_text(encoding="utf-8")
+
+          expected = {
+              "apt_update.js", "command_runner.js", "compass.js", "crypto.js", "docker.js",
+              "email.js", "filebrowser.js", "github_tracker.js", "gpio.js", "graph.js",
+              "hackernews.js", "hiit.js", "i2c.js", "ipcam.js", "mp3.js", "multimeter.js",
+              "oscilloscope.js", "password_generator.js", "pihole.js", "pixel_art.js",
+              "plant_monitor.js", "power.js", "qr.js", "radio.js", "robot_car.js",
+              "screenshot.js", "sd_health.js", "servo.js", "speedtest.js", "ssh_alert.js",
+              "systemd.js", "tamagotchi.js", "telegram.js", "temperature_humidity.js",
+              "todo.js", "totp.js", "ups_battery.js", "video.js", "voice_control.js",
+              "wifi.js", "wifi_scanner.js", "world_clock.js",
+          }
+
           registered = shell.count("this._launcher.register(")
-          extended_exports = extended.count("export class ")
+          actual = {p.name for p in app_dir.glob("*.js") if p.name in expected}
+
           print(f"Launcher registrations: {registered}")
-          print(f"Extended app classes: {extended_exports}")
-          print(f"Existing standalone app modules: {len(legacy)}")
+          print(f"Individual extended modules: {len(actual)}")
+          print(f"Barrel exports: {barrel.count('export {')}")
+
           if registered != 57:
               raise SystemExit(f"Expected 57 launcher registrations, found {registered}")
-          if extended_exports != 42:
-              raise SystemExit(f"Expected 42 new JavaScript app ports, found {extended_exports}")
-          if len(legacy) != 15:
-              raise SystemExit(f"Expected 15 existing standalone JavaScript apps, found {len(legacy)}")
+          if actual != expected:
+              raise SystemExit(f"42-app module mismatch; missing={sorted(expected-actual)} extra={sorted(actual-expected)}")
+          if barrel.count("export {") != 42:
+              raise SystemExit("Expected 42 barrel exports")
+          if Path("web-simulator/js/catalog_app.js").exists():
+              raise SystemExit("Retired generic CatalogApp placeholder must not exist")
           PY
 
       - name: Browser simulator contract
@@ -65,7 +85,8 @@ jobs:
           test -f web-simulator/index.html
           test -f web-simulator/index.css
           test -f web-simulator/main.js
-          test -f web-simulator/js/catalog_app.js
+          test -f web-simulator/js/browser_app.js
+          test -f web-simulator/js/browser_bridge.js
           test -f web-simulator/js/apps/extended_apps.js
           grep -q "57 / 57 app" web-simulator/index.html
           grep -q "main.js" web-simulator/index.html
@@ -74,3 +95,12 @@ jobs:
         run: |
           node --check web-simulator/main.js
           find web-simulator/js -type f -name '*.js' -print0 | xargs -0 -r -n1 node --check
+
+      - name: ESM export smoke test
+        run: |
+          node --input-type=module - <<'JS'
+          const m = await import('./web-simulator/js/apps/extended_apps.js');
+          const names = Object.keys(m);
+          console.log(`Extended app exports: ${names.length}`);
+          if (names.length !== 42) process.exit(1);
+          JS
