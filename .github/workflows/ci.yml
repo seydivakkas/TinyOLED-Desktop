@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master, main]
   pull_request:
-    branches: [main]
+    branches: [master, main]
   workflow_dispatch:
 
 permissions:
@@ -46,10 +46,7 @@ jobs:
           from pathlib import Path
           shell = Path("web-simulator/js/shell.js").read_text(encoding="utf-8")
           extended = Path("web-simulator/js/apps/extended_apps.js").read_text(encoding="utf-8")
-          legacy = [
-              p for p in Path("web-simulator/js/apps").glob("*.js")
-              if p.name not in {"extended_apps.js"}
-          ]
+          legacy = [p for p in Path("web-simulator/js/apps").glob("*.js") if p.name != "extended_apps.js"]
           registered = shell.count("this._launcher.register(")
           extended_exports = extended.count("export class ")
           print(f"Launcher registrations: {registered}")
