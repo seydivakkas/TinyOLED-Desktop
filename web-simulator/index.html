@@ -3,127 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TinyOLED Desktop — Interactive Simulator</title>
-  <meta name="description" content="TinyOLED Desktop için tarayıcı tabanlı 128×64 OLED simülatörü. Donanım projesinde 57 uygulama bulunur; mevcut web portu 15 etkileşimli uygulamayı doğrudan simüle eder.">
+  <title>TinyOLED Desktop — 57 App Interactive Simulator</title>
+  <meta name="description" content="TinyOLED Desktop Raspberry Pi/SSD1306 projesinin 57 uygulamalik tarayici simulatoru. PORT, MOCK ve BRIDGE modlariyla 128x64 OLED arayuzunu inceleyin.">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
   <header class="header">
     <h1>🖥️ TinyOLED Desktop</h1>
-    <div class="subtitle">128×64 OLED Interactive Simulator</div>
+    <div class="subtitle">128×64 OLED · 57-App Interactive Simulator</div>
   </header>
 
   <main class="main-container">
-
     <div class="pcb-board">
-      <div class="pcb-hole pcb-hole--tl"></div>
-      <div class="pcb-hole pcb-hole--tr"></div>
-      <div class="pcb-hole pcb-hole--bl"></div>
-      <div class="pcb-hole pcb-hole--br"></div>
-
+      <div class="pcb-hole pcb-hole--tl"></div><div class="pcb-hole pcb-hole--tr"></div>
+      <div class="pcb-hole pcb-hole--bl"></div><div class="pcb-hole pcb-hole--br"></div>
       <div class="oled-frame">
         <span class="oled-label">SSD1306 · 128×64 · I²C 0x3C</span>
         <canvas id="oled-canvas" width="640" height="320"></canvas>
       </div>
-
       <div class="button-row">
-        <button class="hw-btn" id="btn-up">
-          <span class="btn-icon">▲</span>
-          <span class="btn-label">UP</span>
-        </button>
-        <button class="hw-btn" id="btn-down">
-          <span class="btn-icon">▼</span>
-          <span class="btn-label">DOWN</span>
-        </button>
-        <button class="hw-btn" id="btn-sel">
-          <span class="btn-icon">●</span>
-          <span class="btn-label">SEL</span>
-        </button>
+        <button class="hw-btn" id="btn-up"><span class="btn-icon">▲</span><span class="btn-label">UP</span></button>
+        <button class="hw-btn" id="btn-down"><span class="btn-icon">▼</span><span class="btn-label">DOWN</span></button>
+        <button class="hw-btn" id="btn-sel"><span class="btn-icon">●</span><span class="btn-label">SEL</span></button>
       </div>
     </div>
 
     <section class="info-panel">
       <div class="info-grid">
-        <div class="info-item">
-          <span class="info-label">Durum</span>
-          <span class="info-value" id="info-state">SPLASH</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Uygulama</span>
-          <span class="info-value" id="info-app">Launcher</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Çözünürlük</span>
-          <span class="info-value">128 × 64 px</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">FPS</span>
-          <span class="info-value">20 Hz</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Framebuffer</span>
-          <span class="info-value">1024 bytes</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Uygulama Paritesi</span>
-          <span class="info-value">15 web / 57 cihaz</span>
-        </div>
+        <div class="info-item"><span class="info-label">Durum</span><span class="info-value" id="info-state">SPLASH</span></div>
+        <div class="info-item"><span class="info-label">Uygulama</span><span class="info-value" id="info-app">Launcher</span></div>
+        <div class="info-item"><span class="info-label">Çözünürlük</span><span class="info-value">128 × 64 px</span></div>
+        <div class="info-item"><span class="info-label">FPS</span><span class="info-value">20 Hz</span></div>
+        <div class="info-item"><span class="info-label">Framebuffer</span><span class="info-value">1024 bytes</span></div>
+        <div class="info-item"><span class="info-label">Launcher</span><span class="info-value">57 / 57 app</span></div>
       </div>
     </section>
 
     <section class="controls-help">
       <h3>Kontroller</h3>
       <div class="key-grid">
-        <div class="key-item">
-          <span class="kbd">W</span><span class="kbd">↑</span>
-          <span class="key-desc">Yukarı</span>
-        </div>
-        <div class="key-item">
-          <span class="kbd">S</span><span class="kbd">↓</span>
-          <span class="key-desc">Aşağı</span>
-        </div>
-        <div class="key-item">
-          <span class="kbd">Enter</span><span class="kbd">Space</span>
-          <span class="key-desc">Seç / Onayla</span>
-        </div>
-        <div class="key-item">
-          <span class="kbd">Esc</span>
-          <span class="key-desc">Geri / Çıkış</span>
-        </div>
-        <div class="key-item">
-          <span class="kbd">SEL uzun bas</span>
-          <span class="key-desc">Ana Menü</span>
-        </div>
+        <div class="key-item"><span class="kbd">W</span><span class="kbd">↑</span><span class="key-desc">Önceki</span></div>
+        <div class="key-item"><span class="kbd">S</span><span class="kbd">↓</span><span class="key-desc">Sonraki</span></div>
+        <div class="key-item"><span class="kbd">Enter</span><span class="kbd">Space</span><span class="key-desc">Seç / Aksiyon</span></div>
+        <div class="key-item"><span class="kbd">Esc</span><span class="key-desc">Geri / Çıkış</span></div>
       </div>
+      <p><strong>PORT</strong>: tarayıcıda uygulanmış · <strong>MOCK</strong>: güvenli demo veri · <strong>BRG</strong>: Raspberry Pi/Linux/donanım bridge gerekir.</p>
     </section>
 
     <section class="app-catalog">
-      <h3>Web Simülatöründe Port Edilmiş Uygulamalar (15 / 57)</h3>
-      <p>Donanım sürümünde 57 uygulama bulunur. Buradaki statik GitHub Pages simülatörü, şu anda JavaScript'e port edilmiş 15 uygulamayı çalıştırır. GPIO, I²C, sensör, servis, dosya sistemi veya gizli kimlik bilgisi gerektiren uygulamalar için ayrı browser adaptörü / mock katmanı gerekir.</p>
+      <h3>57 Uygulama — Web Launcher Parity</h3>
       <div class="app-tags">
-        <span class="app-tag">🕐 Saat</span>
-        <span class="app-tag">💻 Sistem</span>
-        <span class="app-tag">🐍 Yılan</span>
-        <span class="app-tag">🐦 Flappy Bird</span>
-        <span class="app-tag">🎲 Zar</span>
-        <span class="app-tag">🧊 3D Küp</span>
-        <span class="app-tag">🌀 Fraktal</span>
-        <span class="app-tag">🧘 Nefes</span>
-        <span class="app-tag">🍅 Pomodoro</span>
-        <span class="app-tag">🌙 Ay Evresi</span>
-        <span class="app-tag">⭐ Starfield</span>
-        <span class="app-tag">💚 Matrix Rain</span>
-        <span class="app-tag">🧬 Game of Life</span>
-        <span class="app-tag">📀 DVD Logo</span>
-        <span class="app-tag">⚙️ Ayarlar</span>
+        <span class="app-tag">01 · Saat</span><span class="app-tag">02 · Sistem</span><span class="app-tag">03 · WiFi</span><span class="app-tag">04 · Dosya</span><span class="app-tag">05 · Ayar</span><span class="app-tag">06 · Guc</span>
+        <span class="app-tag">07 · Yilan</span><span class="app-tag">08 · Flappy</span><span class="app-tag">09 · Pet</span><span class="app-tag">10 · Zar</span>
+        <span class="app-tag">11 · Grafik</span><span class="app-tag">12 · Docker</span><span class="app-tag">13 · Svc</span>
+        <span class="app-tag">14 · GPIO</span><span class="app-tag">15 · I2C</span><span class="app-tag">16 · Komut</span><span class="app-tag">17 · Scope</span><span class="app-tag">18 · Metre</span>
+        <span class="app-tag">19 · SSH</span><span class="app-tag">20 · TOTP</span><span class="app-tag">21 · Sifre</span><span class="app-tag">22 · WiScan</span>
+        <span class="app-tag">23 · Yildiz</span><span class="app-tag">24 · Life</span><span class="app-tag">25 · DVD</span><span class="app-tag">26 · Matrx</span>
+        <span class="app-tag">27 · Kripto</span><span class="app-tag">28 · 3D</span><span class="app-tag">29 · Fraktl</span>
+        <span class="app-tag">30 · QR</span><span class="app-tag">31 · GitHub</span><span class="app-tag">32 · Speed</span><span class="app-tag">33 · HNews</span>
+        <span class="app-tag">34 · Temp</span><span class="app-tag">35 · UPS</span><span class="app-tag">36 · Bitki</span><span class="app-tag">37 · Pusula</span>
+        <span class="app-tag">38 · MP3</span><span class="app-tag">39 · Radyo</span><span class="app-tag">40 · Video</span>
+        <span class="app-tag">41 · Tele</span><span class="app-tag">42 · Email</span><span class="app-tag">43 · Ay</span><span class="app-tag">44 · Dunya</span>
+        <span class="app-tag">45 · Pixel</span><span class="app-tag">46 · Shot</span><span class="app-tag">47 · Pomo</span><span class="app-tag">48 · Nefes</span><span class="app-tag">49 · HIIT</span>
+        <span class="app-tag">50 · Servo</span><span class="app-tag">51 · Araba</span><span class="app-tag">52 · PiHole</span><span class="app-tag">53 · IPCam</span>
+        <span class="app-tag">54 · Ses</span><span class="app-tag">55 · SD</span><span class="app-tag">56 · APT</span><span class="app-tag">57 · Todo</span>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>TinyOLED Desktop Simulator — 128×64 ekran davranışını tarayıcıda inceleyin.</p>
-    <p>57 cihaz uygulaması · 15 mevcut web portu · <a href="https://github.com/seydivakkas/TinyOLED-Desktop/blob/main/docs/SIMULATOR_PARITY.md">Simulator parity roadmap</a></p>
+    <p>57 launcher entry; donanım gerektiren yüzeyler BRIDGE, güvenli demo yüzeyleri MOCK olarak açıkça etiketlenir.</p>
+    <p><a href="https://github.com/seydivakkas/TinyOLED-Desktop">TinyOLED Desktop on GitHub</a></p>
   </footer>
 
   <script type="module" src="main.js"></script>
