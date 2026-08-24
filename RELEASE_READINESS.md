@@ -20,6 +20,7 @@ TinyOLED Desktop is a strong `v1.0.0` candidate because it has a clear product b
 - [x] `v1.0.0` release notes draft exists.
 - [x] Static CI validated green against the current runtime/code tree via temporary PR CI run #28 (`32745087198`).
 - [x] Pages workflow confirmed green from `main` for deployment marker commit `828dc0b75e044203ce4d0d95cad567cd4429edca`.
+- [x] Read-only Raspberry Pi hardware smoke-test tooling and release procedure are committed.
 - [ ] Raspberry Pi + SSD1306 install path smoke-tested on the final release commit.
 - [ ] Hardware-dependent BRG execution paths smoke-tested on the intended Raspberry Pi configuration.
 - [ ] Release commit SHA locked below.
@@ -42,11 +43,19 @@ The validation PR was closed without merging.
 
 The GitHub Pages workflow **Deploy Web Simulator to GitHub Pages** completed successfully from `main` for commit `828dc0b75e044203ce4d0d95cad567cd4429edca` (`chore: trigger Pages deployment for browser runtime upgrade`). This validates the browser deployment path for the upgraded 57-app runtime.
 
+## Hardware smoke-test tooling
+
+- Script: [`tools/hardware_smoke_test.py`](tools/hardware_smoke_test.py)
+- Procedure: [`docs/HARDWARE_SMOKE_TEST.md`](docs/HARDWARE_SMOKE_TEST.md)
+- Generated report: `hardware_smoke_report.json` (ignored by Git)
+
+The automated script is read-only. It validates platform, Python syntax, dependencies, I2C availability, SSD1306 address `0x3C`, systemd service presence, bridge health and 57-app browser parity without performing actuator writes or system mutations.
+
 ## Current integration candidate
 
 `828dc0b75e044203ce4d0d95cad567cd4429edca`
 
-This commit contains the post-merge Pages deployment marker on top of the 42-app browser runtime upgrade. Subsequent commits only update release-readiness documentation. It is **not** the final release SHA until hardware gates pass.
+This commit contains the post-merge Pages deployment marker on top of the 42-app browser runtime upgrade. Subsequent commits add release-readiness and hardware-validation tooling only. It is **not** the final release SHA until hardware gates pass.
 
 ## Release commit
 
