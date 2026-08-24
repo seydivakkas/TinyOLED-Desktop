@@ -11,8 +11,9 @@
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-Embedded-A22846?style=flat-square&logo=raspberrypi&logoColor=white)
 ![SSD1306](https://img.shields.io/badge/OLED-128%C3%9764-0A66C2?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3-3776AB?style=flat-square&logo=python&logoColor=white)
-![Apps](https://img.shields.io/badge/apps-57%2B-2EA44F?style=flat-square)
-[![Pages](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml)
+![Device Apps](https://img.shields.io/badge/device%20apps-57-2EA44F?style=flat-square)
+![Web Simulator](https://img.shields.io/badge/web%20ports-15-F59E0B?style=flat-square)
+[![Pages](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml)
 
 **A tiny desktop environment built without a GUI framework: custom framebuffer rendering, bitmap fonts, monochrome icons, cooperative scheduling and a browser-based OLED simulator.**
 
@@ -32,11 +33,23 @@ Instead of relying on a desktop GUI toolkit, the project implements the renderin
 
 ---
 
+## Application scope
+
+The Raspberry Pi / SSD1306 project contains a **57-application device catalog**. The public GitHub Pages simulator is a separate JavaScript port and currently implements **15 interactive applications**.
+
+This distinction matters because the browser cannot directly execute Raspberry Pi / Linux facilities such as GPIO, I²C, `systemd`, Docker, `/var/log`, local shell commands, attached sensors or private account credentials. Those applications require either a browser-native port, a deterministic mock, or a Raspberry Pi/local bridge.
+
+**Current parity:** `15 web ports / 57 device applications`
+
+See the implementation roadmap and classification policy in **[Simulator Parity](docs/SIMULATOR_PARITY.md)**.
+
+---
+
 ## Minimum reproducible run
 
 ### Browser path — no hardware required
 
-Open the **[live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)** to inspect the framebuffer/UI behavior directly.
+Open the **[live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)** to inspect the currently ported framebuffer/UI behavior directly.
 
 ### Raspberry Pi path
 
@@ -78,7 +91,7 @@ Physical Buttons / Browser Input
        SSD1306 128×64
 ```
 
-The same interaction model is mirrored in the browser simulator so the desktop can be explored without physical hardware.
+The interaction model is mirrored in the browser simulator, but device-specific integrations are not claimed as browser-native behavior unless a port/mock/bridge exists.
 
 ---
 
@@ -94,7 +107,8 @@ The same interaction model is mirrored in the browser simulator so the desktop c
 | Input | Three-button physical interaction model |
 | Hardware | Raspberry Pi + SSD1306 over I²C |
 | Simulation | Browser implementation of the OLED desktop behavior |
-| Application set | **57+ applications** across utilities, visualization, games and system tools |
+| Device application set | **57 applications** across utilities, visualization, games, sensors and system tools |
+| Current web parity | **15 JavaScript ports** |
 
 ---
 
@@ -123,16 +137,20 @@ Graphs · matrix effects · starfield · fractal / geometry demos
 **Games & interaction**  
 Snake · Flappy-style game · dice · virtual pet and other compact applications
 
-**Productivity / ambient**  
-Pomodoro · breathing tools · notifications · status views
+**Hardware & sensors**  
+GPIO · I²C · ADC · power monitoring · environmental sensors · robotics
 
 ---
 
 ## Browser simulator
 
-The browser simulator reproduces the OLED interaction model using a canvas-based renderer and lets the project be evaluated without a Raspberry Pi or physical SSD1306 module.
+The browser simulator reproduces the OLED interaction model using a canvas-based renderer. It currently exposes the **15 applications already ported to JavaScript**, not the full 57-device catalog.
+
+The remaining applications are tracked as `PORT`, `MOCK` or `BRIDGE` targets so the public demo never pretends that browser-generated data is real hardware evidence.
 
 ### **[Open the live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)**
+
+### **[Simulator parity roadmap →](docs/SIMULATOR_PARITY.md)**
 
 ---
 
@@ -148,7 +166,7 @@ The browser simulator reproduces the OLED interaction model using a canvas-based
 2. **Design for the physical display constraint**
 3. **Keep interaction deterministic with explicit state machines**
 4. **Separate application logic from the display backend**
-5. **Provide a simulator so hardware-dependent work remains inspectable**
+5. **Do not present simulated data as hardware validation**
 
 ---
 
@@ -158,7 +176,7 @@ The root README is intentionally concise and portfolio-oriented. The original fu
 
 ### **[Full Technical Documentation →](docs/README_FULL.md)**
 
-It contains the full application catalog, hardware setup, architecture details, controls and implementation notes.
+It contains the full 57-application catalog, hardware setup, architecture details, controls and implementation notes.
 
 ---
 
@@ -166,6 +184,6 @@ It contains the full application catalog, hardware setup, architecture details, 
 
 **128×64 pixels. Three buttons. A complete micro-desktop experiment.**
 
-[Live Simulator](https://seydivakkas.github.io/TinyOLED-Desktop/) · [GitHub Profile](https://github.com/seydivakkas) · [Full Documentation](docs/README_FULL.md)
+[Live Simulator](https://seydivakkas.github.io/TinyOLED-Desktop/) · [Simulator Parity](docs/SIMULATOR_PARITY.md) · [Full Documentation](docs/README_FULL.md)
 
 </div>
