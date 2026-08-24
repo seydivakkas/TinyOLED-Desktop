@@ -141,6 +141,28 @@ CI enforces the 57 launcher registrations, the 42 individual extended modules, J
 
 ---
 
+## Remaining release validation
+
+The browser/runtime side is validated, but the project intentionally keeps a small set of **open release-validation items** visible instead of presenting them as completed.
+
+| Item | Status |
+|---|---|
+| Static CI / 57-app parity / 42-module export checks | **PASS** |
+| GitHub Pages deployment from `main` | **PASS** |
+| `master` branch | **Retained intentionally** for legacy / transition reference; `main` remains the default source of truth |
+| Raspberry Pi + SSD1306 physical smoke test | **PENDING** |
+| Hardware-dependent `BRG` execution-path smoke tests | **PENDING** |
+| Final immutable release SHA | **NOT LOCKED** |
+| `v1.0.0` Git tag / GitHub Release | **NOT PUBLISHED** |
+
+The remaining physical checks are expected to validate the real boot path, SSD1306 output, three-button interaction, I²C access and selected hardware-dependent integrations. Until those checks are completed, a green browser deployment is **not** treated as evidence of complete hardware validation.
+
+`master` is intentionally kept in the repository for now. New development and release preparation should use **`main`** as the canonical branch.
+
+Detailed gate status is maintained in **[RELEASE_READINESS.md](RELEASE_READINESS.md)** and the hardware procedure is documented in **[docs/HARDWARE_SMOKE_TEST.md](docs/HARDWARE_SMOKE_TEST.md)**.
+
+---
+
 ## Technology stack
 
 `Python` · `Raspberry Pi` · `SSD1306` · `I²C` · `Framebuffer Rendering` · `Bitmap Fonts` · `State Machines` · `JavaScript` · `Canvas` · `Web APIs` · `Web Serial`
