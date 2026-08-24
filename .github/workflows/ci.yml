@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-validation:
+    name: Static validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Python syntax check
+        run: python -m compileall -q main.py core apps desktop config
+
+      - name: Installer shell syntax
+        run: bash -n install.sh
+
+      - name: Device application inventory
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          apps = [p for p in Path("apps").glob("*.py") if p.name != "__init__.py"]
+          print(f"Device application modules discovered: {len(apps)}")
+          if len(apps) < 50:
+              raise SystemExit("Device application inventory unexpectedly dropped below 50 modules")
+          PY
+
+      - name: Browser simulator 57-app parity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          shell = Path("web-simulator/js/shell.js").read_text(encoding="utf-8")
+          extended = Path("web-simulator/js/apps/extended_apps.js").read_text(encoding="utf-8")
+          legacy = [p for p in Path("web-simulator/js/apps").glob("*.js") if p.name != "extended_apps.js"]
+          registered = shell.count("this._launcher.register(")
+          extended_exports = extended.count("export class ")
+          print(f"Launcher registrations: {registered}")
+          print(f"Extended app classes: {extended_exports}")
+          print(f"Existing standalone app modules: {len(legacy)}")
+          if registered != 57:
+              raise SystemExit(f"Expected 57 launcher registrations, found {registered}")
+          if extended_exports != 42:
+              raise SystemExit(f"Expected 42 new JavaScript app ports, found {extended_exports}")
+          if len(legacy) != 15:
+              raise SystemExit(f"Expected 15 existing standalone JavaScript apps, found {len(legacy)}")
+          PY
+
+      - name: Browser simulator contract
+        run: |
+          test -f web-simulator/index.html
+          test -f web-simulator/index.css
+          test -f web-simulator/main.js
+          test -f web-simulator/js/catalog_app.js
+          test -f web-simulator/js/apps/extended_apps.js
+          grep -q "57 / 57 app" web-simulator/index.html
+          grep -q "main.js" web-simulator/index.html
+
+      - name: JavaScript syntax check
+        run: |
+          node --check web-simulator/main.js
+          find web-simulator/js -type f -name '*.js' -print0 | xargs -0 -r -n1 node --check
