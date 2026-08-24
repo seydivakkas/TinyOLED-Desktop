@@ -4,35 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TinyOLED Desktop — Interactive Simulator</title>
-  <meta name="description" content="Raspberry Pi + 0.96 inch SSD1306 OLED ekran için TinyOLED Desktop işletim sisteminin tarayıcı tabanlı interaktif simülatörü. 128×64 piksel monokrom ekran, 15 uygulama.">
+  <meta name="description" content="TinyOLED Desktop için tarayıcı tabanlı 128×64 OLED simülatörü. Donanım projesinde 57 uygulama bulunur; mevcut web portu 15 etkileşimli uygulamayı doğrudan simüle eder.">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-  <!-- ═══ Header ═══ -->
   <header class="header">
     <h1>🖥️ TinyOLED Desktop</h1>
     <div class="subtitle">128×64 OLED Interactive Simulator</div>
   </header>
 
-  <!-- ═══ Main ═══ -->
   <main class="main-container">
 
-    <!-- ─── PCB Board ─── -->
     <div class="pcb-board">
-      <!-- Mounting holes -->
       <div class="pcb-hole pcb-hole--tl"></div>
       <div class="pcb-hole pcb-hole--tr"></div>
       <div class="pcb-hole pcb-hole--bl"></div>
       <div class="pcb-hole pcb-hole--br"></div>
 
-      <!-- OLED Display -->
       <div class="oled-frame">
         <span class="oled-label">SSD1306 · 128×64 · I²C 0x3C</span>
         <canvas id="oled-canvas" width="640" height="320"></canvas>
       </div>
 
-      <!-- Hardware Buttons -->
       <div class="button-row">
         <button class="hw-btn" id="btn-up">
           <span class="btn-icon">▲</span>
@@ -49,7 +43,6 @@
       </div>
     </div>
 
-    <!-- ─── Info Panel ─── -->
     <section class="info-panel">
       <div class="info-grid">
         <div class="info-item">
@@ -73,13 +66,12 @@
           <span class="info-value">1024 bytes</span>
         </div>
         <div class="info-item">
-          <span class="info-label">Uygulamalar</span>
-          <span class="info-value">15 app</span>
+          <span class="info-label">Uygulama Paritesi</span>
+          <span class="info-value">15 web / 57 cihaz</span>
         </div>
       </div>
     </section>
 
-    <!-- ─── Controls ─── -->
     <section class="controls-help">
       <h3>Kontroller</h3>
       <div class="key-grid">
@@ -106,9 +98,9 @@
       </div>
     </section>
 
-    <!-- ─── App Catalog ─── -->
     <section class="app-catalog">
-      <h3>Yüklü Uygulamalar</h3>
+      <h3>Web Simülatöründe Port Edilmiş Uygulamalar (15 / 57)</h3>
+      <p>Donanım sürümünde 57 uygulama bulunur. Buradaki statik GitHub Pages simülatörü, şu anda JavaScript'e port edilmiş 15 uygulamayı çalıştırır. GPIO, I²C, sensör, servis, dosya sistemi veya gizli kimlik bilgisi gerektiren uygulamalar için ayrı browser adaptörü / mock katmanı gerekir.</p>
       <div class="app-tags">
         <span class="app-tag">🕐 Saat</span>
         <span class="app-tag">💻 Sistem</span>
@@ -129,10 +121,9 @@
     </section>
   </main>
 
-  <!-- ═══ Footer ═══ -->
   <footer class="footer">
-    <p>TinyOLED Desktop Simulator — 128 piksel ile neler yapılabileceğini keşfedin.</p>
-    <p>Crafted with ❤️ for the Raspberry Pi community · <a href="https://github.com/seydivakkas">@seydivakkas</a></p>
+    <p>TinyOLED Desktop Simulator — 128×64 ekran davranışını tarayıcıda inceleyin.</p>
+    <p>57 cihaz uygulaması · 15 mevcut web portu · <a href="https://github.com/seydivakkas/TinyOLED-Desktop/blob/main/docs/SIMULATOR_PARITY.md">Simulator parity roadmap</a></p>
   </footer>
 
   <script type="module" src="main.js"></script>
