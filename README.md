@@ -12,7 +12,7 @@
 ![SSD1306](https://img.shields.io/badge/OLED-128%C3%9764-0A66C2?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Apps](https://img.shields.io/badge/apps-57%2B-2EA44F?style=flat-square)
-![Simulator](https://img.shields.io/badge/browser-live%20simulator-F57C00?style=flat-square)
+[![Pages](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/seydivakkas/TinyOLED-Desktop/actions/workflows/deploy-pages.yml)
 
 **A tiny desktop environment built without a GUI framework: custom framebuffer rendering, bitmap fonts, monochrome icons, cooperative scheduling and a browser-based OLED simulator.**
 
@@ -29,6 +29,30 @@
 TinyOLED Desktop explores how much interface and application behavior can be built inside the constraints of a **128×64 monochrome display controlled with only three physical buttons**.
 
 Instead of relying on a desktop GUI toolkit, the project implements the rendering and interaction stack directly. That makes it a compact systems project covering graphics primitives, input state, scheduling, memory constraints and embedded interaction design.
+
+---
+
+## Minimum reproducible run
+
+### Browser path — no hardware required
+
+Open the **[live simulator](https://seydivakkas.github.io/TinyOLED-Desktop/)** to inspect the framebuffer/UI behavior directly.
+
+### Raspberry Pi path
+
+```bash
+git clone https://github.com/seydivakkas/TinyOLED-Desktop.git
+cd TinyOLED-Desktop
+sudo bash install.sh
+sudo reboot
+```
+
+For manual hardware setup, enable I²C, verify the SSD1306 at address `0x3C`, then run:
+
+```bash
+sudo i2cdetect -y 1
+sudo python3 main.py
+```
 
 ---
 
