@@ -18,17 +18,31 @@ TinyOLED Desktop is a strong `v1.0.0` candidate because it has a clear product b
 - [x] Optional local Raspberry Pi bridge is loopback-bound, allow-listed and control-off by default.
 - [x] Known limitations are documented.
 - [x] `v1.0.0` release notes draft exists.
-- [ ] Static CI confirmed green on the final release candidate commit.
+- [x] Static CI validated green against the current runtime/code tree via temporary PR CI run #28 (`32745087198`).
 - [ ] Pages workflow confirmed green from `main`.
 - [ ] Raspberry Pi + SSD1306 install path smoke-tested on the final release commit.
 - [ ] Hardware-dependent BRG execution paths smoke-tested on the intended Raspberry Pi configuration.
 - [ ] Release commit SHA locked below.
 
+## CI evidence
+
+Temporary validation PR #1 changed only `docs/CI_VALIDATION_MARKER.md`; runtime code was identical to its `main` base. GitHub Actions run #28 completed successfully with every release CI step green:
+
+- Python syntax + `web-bridge/server.py` compile
+- installer shell syntax
+- device application inventory
+- 57-app browser parity
+- browser simulator contract
+- JavaScript syntax across the simulator tree
+- 42-module ESM export smoke test
+
+The validation PR was closed without merging.
+
 ## Current integration candidate
 
 `828dc0b75e044203ce4d0d95cad567cd4429edca`
 
-This commit contains the post-merge Pages deployment marker on top of the 42-app browser runtime upgrade. It is **not** the final release SHA until CI, Pages and hardware gates pass.
+This commit contains the post-merge Pages deployment marker on top of the 42-app browser runtime upgrade. Subsequent commits only update release-readiness documentation. It is **not** the final release SHA until Pages and hardware gates pass.
 
 ## Release commit
 
