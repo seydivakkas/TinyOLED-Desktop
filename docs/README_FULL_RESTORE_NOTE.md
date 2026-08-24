@@ -1,0 +1,1 @@
+`docs/README_FULL.md` is an archival copy of the original long-form project README. Current browser-simulator status is maintained in the root `README.md`, `docs/SIMULATOR_PARITY.md`, and `docs/BROWSER_APP_IMPLEMENTATION.md` so the archive can remain historically intact.
